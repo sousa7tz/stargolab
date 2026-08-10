@@ -125,12 +125,12 @@ button, a {
   fill: currentColor;
 }
 
-/* --- HERO SECTION COM AMBIENT GLOW --- */
+/* --- HERO SECTION (AJUSTADA PARA PEEKING/CONTINUIDADE) --- */
 .hero {
-  min-height: 88vh;
+  min-height: 78vh;
   display: flex;
   align-items: center;
-  padding: 130px 0 50px;
+  padding: 120px 0 32px;
   position: relative;
   overflow: hidden;
 }
@@ -228,12 +228,23 @@ h1 {
   transform: translateY(-2px);
 }
 
+/* --- CONTAINER INFERIOR DA HERO --- */
+.hero-bottom-bar {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* --- BADGE GOOGLE PAGESPEED --- */
 .hero-proof {
-  margin-top: 40px;
+  margin-top: 0;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 14px;
+  padding: 0 14px;
+  height: 38px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -246,24 +257,98 @@ h1 {
   width: 14px;
   height: 14px;
   color: #ffffff;
+  flex: none;
 }
 
+/* --- BOTÃO SCROLL CUE COM GLOW PERIÓDICO --- */
+/* --- BOTÃO SCROLL CUE (GLASSMORPHISM + SHIMMER PREMIUM) --- */
 .scroll-cue {
-  margin-top: 32px;
-  display: flex;
+  position: relative;
+  margin-top: 0;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: var(--muted-2);
+  gap: 10px;
+  padding: 0 16px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.06); /* Superfície destacada do fundo */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color: #ffffff;
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Varredura de Luz Periódica (Shimmer Linear/Apple) */
+.scroll-cue::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: shimmerSweep 2.5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.scroll-cue:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
 }
 
 .scroll-cue svg {
-  width: 12px;
-  height: 12px;
-  animation: bounce 2s infinite;
+  width: 13px;
+  height: 13px;
+  color: #ffffff;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+  transition: transform 0.25s ease;
+}
+
+.scroll-cue:hover svg {
+  transform: translateY(3px);
+}
+
+/* --- ANIMAÇÃO SHIMMER --- */
+@keyframes shimmerSweep {
+  0%, 20% {
+    left: -150%; /* Pausa curtinha de apenas 0.5s */
+  }
+  100% {
+    left: 200%;  /* Varredura mais lenta e fluida cobrindo o restante */
+  }
+}
+
+/* --- ANIMAÇÃO DE BRILHO (GLOW A CADA 4 SEGUNDOS) --- */
+@keyframes periodicGlow {
+  0%, 70%, 100% {
+    border-color: var(--border);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  85% {
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 16px -2px rgba(255, 255, 255, 0.25);
+  }
 }
 
 @keyframes bounce {
@@ -318,8 +403,24 @@ h1 {
 
 /* Card Legado (Efeito Apagado) */
 .comparison-card.legacy {
-  opacity: 0.65;
-  border-color: rgba(255, 255, 255, 0.04);
+  opacity: 0.4;
+  background: rgba(255, 255, 255, 0.01);
+  border-color: rgba(255, 255, 255, 0.05);
+  filter: grayscale(1);
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.comparison-card.legacy .card-title {
+  color: var(--muted);
+}
+
+.comparison-card.legacy .feature-list li {
+  color: var(--muted-2);
+}
+
+.comparison-card.legacy:hover {
+  opacity: 0.75;
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Card StargoLab (Destaque Imponente) */
@@ -620,7 +721,6 @@ footer {
     scroll-snap-align: center;
   }
 
-  /* No mobile, ajusta o botão do header pra ficar compacto */
   .header-cta span {
     display: none;
   }
@@ -659,8 +759,14 @@ footer {
 }
 
 @media (min-width: 900px) {
+  .hero {
+    min-height: 74vh;
+    padding-top: 110px;
+    padding-bottom: 24px;
+  }
+
   .section {
-    padding: 110px 0;
+    padding: 100px 0;
   }
 
   .comparison-card {
@@ -675,4 +781,33 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* --- ANIMAÇÃO DE REVEAL (SCROLL / LOAD) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Estado Ativo (Surgido na tela) */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Delays (Pra elementos aparecerem em sequência/escadinha) */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* Desativa animação para usuários com preferência de movimento reduzido (Acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

@@ -42,7 +42,7 @@ function initCopyEmail() {
     navigator.clipboard.writeText(emailText).then(() => {
       const originalText = emailSpan.innerText;
       emailSpan.innerText = '✓ E-mail copiado!';
-      
+
       setTimeout(() => {
         emailSpan.innerText = originalText;
       }, 2000);
@@ -51,3 +51,26 @@ function initCopyEmail() {
     });
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Configuração do Observador de Scroll
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px', // Dispara um pouco antes do elemento encostar no fundo da tela
+    threshold: 0.15 // Dispara quando 15% do elemento estiver visível
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        // Para de observar depois que já animou uma vez (economiza memória)
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Aplica em todos os elementos com a classe .reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  revealElements.forEach(el => revealObserver.observe(el));
+});
