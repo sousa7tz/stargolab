@@ -1,0 +1,21 @@
+{
+  "name": "stargolab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page da StargoLab. e demos por nicho — site estático publicado no Netlify.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs src 3000",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/build.mjs && node scripts/serve.mjs dist 4173",
+    "new:demo": "node scripts/new-demo.mjs"
+  },
+  "devDependencies": {
+    "html-minifier-terser": "7.2.0",
+    "lightningcss": "1.33.0",
+    "terser": "5.51.2"
+  }
+}

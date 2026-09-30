@@ -8,12 +8,12 @@ Vale para **toda** alteração, inclusive as pequenas (correção de texto, ajus
 
 1. **Verificar o estado:** rodar `git status` e `git branch` para confirmar a branch atual e se há alterações não commitadas pendentes. Se houver pendências, avisar o usuário antes de continuar.
 2. **Criar branch:** sair da `main` para uma branch nova no padrão `<tipo>/<descricao-em-kebab-case>` (ex.: `feat/hero-section-mobile`). Nunca editar direto na `main`.
-3. **Editar os arquivos fonte** (`style.css`, `main.js`, `script.js`, HTML), nunca apenas os `.min`.
-4. **Regenerar os `.min`** correspondentes (ver "Fluxo de edição").
+3. **Editar só os arquivos em `src/`** (e `scripts/`, `templates/` quando for o caso). Nunca editar `dist/`: é gerada pelo build e não vai para o git.
+4. **Rodar `npm run build`** e garantir que passa sem erros (o build também valida as páginas — ver "Build e validação").
 5. **Atualizar os escopos:** se a alteração introduzir um escopo novo, adicioná-lo à lista em "Escopos válidos" neste arquivo.
 6. **Sugerir o commit:** listar os arquivos alterados e propor a mensagem no padrão Conventional Commits.
 7. **Aguardar confirmação:** perguntar se deve prosseguir com `git add` e `git commit`. Só executar com confirmação explícita do usuário.
-8. **Instruir a abertura de PR** para a `main`. Nunca fazer merge automático.
+8. **Instruir a abertura de PR** para a `main`. O Netlify gera uma prévia (deploy preview) do PR. Nunca fazer merge automático.
 
 ## Regra obrigatória: Git e commits
 
@@ -47,10 +47,12 @@ Lista mantida atualizada. Sempre que uma alteração introduzir um escopo novo (
 - `perf & ui`
 - `html copy`
 - `google verification`
+- `build` — scripts de build/servidor, `package.json`, `netlify.toml`
+- `seo` — metas, Open Graph, `robots.txt`, `sitemap.xml`, 404
 
 ## Visão geral
 
-Site estático (HTML + CSS + JS puro, **sem framework, sem bundler, sem `package.json`**) com a landing page oficial da StargoLab. (`stargolab.com.br`) e landing pages de demonstração por nicho.
+Site estático (HTML + CSS + JS puro, **sem framework**) com a landing page oficial da StargoLab. (`stargolab.com.br`) e landing pages de demonstração por nicho. Publicado no **Netlify**, que roda o build a cada push.
 
 - Público: empresas locais brasileiras. Todo conteúdo visível é em **português do Brasil** (`lang="pt-BR"`).
 - Objetivo de cada página: gerar confiança e levar o visitante ao **WhatsApp** (CTA principal).
@@ -59,45 +61,73 @@ Site estático (HTML + CSS + JS puro, **sem framework, sem bundler, sem `package
 ## Estrutura
 
 ```
-index.html                  # Landing page principal (HTML minificado em uma linha)
-src/assets/css/variables.css  # Design tokens (:root) da página principal
-src/assets/css/style.css      # Fonte legível do CSS (importa variables.css)
-src/assets/css/style.min.css  # Versão minificada — é a que o index.html carrega
-src/assets/js/main.js         # Fonte legível do JS
-src/assets/js/main.min.js     # Versão minificada — é a que o index.html carrega
-demo/<nicho>/               # Cada demo é autocontida (html, css, js, assets próprios)
-  demo/gym/                 # Apex Gym (usa style.min.css / script.min.js + assets/ locais)
-  demo/clinic/              # Lúmina Odontologia (usa css/style.css e js/main.js direto)
-public/                     # Reservado para arquivos públicos (og-image etc.)
+src/                          # TUDO o que vai ao ar (fonte legível)
+  index.html                  # Home da StargoLab.
+  404.html                    # Página de erro (caminhos absolutos: é servida em qualquer URL)
+  favicon.svg · apple-touch-icon.png · robots.txt · sitemap.xml
+  assets/
+    css/style.css             # Tokens (:root) + estilos da home
+    js/main.js
+    fonts/                    # .woff2 auto-hospedadas
+    img/                      # og-image.jpg etc.
+  demo/<nicho>/               # Cada demo é autocontida (pode virar o site de um cliente)
+    index.html
+    assets/{css/style.css, js/main.js, img/, fonts/}
+templates/demo/               # Molde usado por `npm run new:demo` (não vai ao ar)
+scripts/
+  build.mjs                   # src/ → dist/ (minifica, versiona, valida)
+  serve.mjs                   # Servidor local que imita o Netlify
+  new-demo.mjs                # Cria uma demo a partir do molde
+dist/                         # Saída do build (ignorada pelo git) — é o que o Netlify publica
+netlify.toml                  # Comando de build, pasta publicada, headers e redirects
 ```
 
-- A home linka para `/demo/gym`, `/demo/clinic` e `/demo/barber` (caminhos absolutos a partir da raiz do domínio). **`demo/barber` ainda não existe** — ao criar novas demos, siga o padrão `demo/<nicho>/index.html`.
+- Demos atuais: `gym` (Apex Gym), `clinic` (Lúmina Odontologia) e `barbershop` (Navalha Barber Club).
+- Links e assets locais usam **caminho relativo** (`demo/<nicho>/` na home, `../../` para voltar das demos), para o site funcionar em qualquer raiz: Netlify, `npm run preview` ou Live Server abrindo a `dist/` como subpasta. Links de pasta levam **barra final** (sem ela, o Netlify responde com um redirect 301 extra). A única exceção é a `404.html`, que usa caminhos absolutos porque é servida em qualquer URL.
+- Para criar uma demo nova: `npm run new:demo -- <nicho> "<Nome do negócio>"` e depois linkar na seção `#demos` da home.
 
-## Fluxo de edição
+## Comandos
 
-1. **Edite sempre os arquivos fonte** (`style.css`, `main.js`, `script.js`), nunca apenas o `.min`.
-2. Depois, **regenere o `.min` correspondente** para manter os dois em sincronia (não há script de build; use um minificador externo, ex. `npx terser`/`npx csso`, e avise o usuário se não conseguir gerar).
-3. O `index.html` da raiz está minificado. Ao editá-lo, preserve o estilo compacto (atributos sem aspas quando possível, sem quebras de linha) ou pergunte ao usuário antes de reformatar.
-4. Não adicione dependências, frameworks ou ferramentas de build sem pedido explícito.
+```bash
+npm install        # uma vez (Node 22+, ver .nvmrc)
+npm run dev        # serve src/ em http://localhost:3000 (sem build, para editar)
+npm run build      # gera dist/ — rode sempre antes de commitar
+npm run preview    # build + serve dist/ em http://localhost:4173 (igual à produção)
+npm run new:demo -- <nicho> "<Nome>"
+```
+
+## Build e validação
+
+O `scripts/build.mjs` copia `src/` para `dist/` e:
+
+1. Minifica CSS (lightningcss — embute `@import` e mantém fallbacks como `vh` antes de `svh`), JS (terser) e HTML (html-minifier-terser). Não existem mais arquivos `.min` no repositório.
+2. Acrescenta `?v=<hash do conteúdo>` a todo asset local referenciado no HTML e no CSS e gera `dist/_headers` com cache imutável de 1 ano para as pastas `assets/`. **Não é preciso renomear arquivos ao alterá-los** — o hash muda sozinho.
+3. **Falha o build** se encontrar: link/asset local quebrado, `<img>` sem `alt`/`width`/`height`, `target="_blank"` sem `rel="noopener"`, `<use href="#id">` sem símbolo no sprite, caminho local absoluto (`/...`) fora da `404.html`, página sem `lang`, `<title>`, `meta description`, `viewport` ou `theme-color`, ou JSON-LD inválido.
+
+Arquivos CSS cujo nome começa com `_` são parciais: só entram via `@import` e não são publicados.
+
+`<link rel="stylesheet" href="…" data-inline>` faz o build embutir o CSS minificado na página, com os `url()` convertidos para caminhos a partir da raiz. É usado na `404.html`, que é servida em qualquer URL e por isso não pode depender de um caminho para o CSS.
 
 ## Convenções de HTML
 
-- HTML semântico: `header`, `main`, `section`, `article`, `footer`, `ol/ul` para listas.
-- Ícones como **SVG inline** com `aria-hidden="true"`; links/ícones sem texto recebem `aria-label`.
+- HTML semântico: `header`, `main`, `section`, `article`, `footer`, `ol/ul` para listas; sem pular níveis de heading.
+- Ícones como **SVG inline** com `aria-hidden="true"`; ícones repetidos vão para um **sprite** (`<symbol>` no topo do `body` + `<use href="#i-nome">`). Links/ícones sem texto recebem `aria-label`.
 - Links externos: `target="_blank" rel="noopener noreferrer"`.
-- Links de WhatsApp no formato `https://wa.me/55<DDD><número>?text=<mensagem URL-encoded>`.
-- Toda página deve ter: `meta description`, `meta viewport`, `theme-color`, `<title>` descritivo; na home também Open Graph/Twitter Cards. Não remova a meta `google-site-verification`.
-- Animações de entrada: classe `reveal` + `delay-1`/`delay-2`/`delay-3`; o JS adiciona `active` via `IntersectionObserver`.
+- Links de WhatsApp no formato `https://wa.me/55<DDD><número>?text=<mensagem URL-encoded>`. **Nas demos, os links apontam para o WhatsApp da StargoLab** (quem clica é um potencial cliente).
+- Toda página deve ter: `meta description`, `meta viewport`, `theme-color`, `<title>` descritivo e Open Graph com `og:image` de 1200×630. Não remova a meta `google-site-verification` da home.
+- **Demos:** `<meta name="robots" content="noindex, follow">` (são negócios fictícios e não devem aparecer no Google) e aviso visível em depoimentos, avaliações, casos e registros profissionais ilustrativos. Nunca use números de registro (CRO, CRM etc.) que possam pertencer a uma pessoa real.
+- Animações de entrada: classe `reveal` + `delay-1`/`delay-2`/`delay-3`; o JS adiciona `active` via `IntersectionObserver`. O `<head>` tem `<script>document.documentElement.classList.add('js')</script>` e o CSS só esconde `.js .reveal` — **sem JS, o conteúdo aparece normalmente**.
+- Imagens: `width`, `height` e `alt` sempre; `loading="lazy" decoding="async"` abaixo da dobra; `fetchpriority="high"` ou `preload` na imagem principal do hero.
 
 ## Convenções de CSS
 
-- Cores, fontes e medidas via **custom properties em `:root`** (`var(--...)`). Não use valores de cor soltos quando existir um token.
-- Página principal: tema escuro (`--bg: #080808`), fontes Poppins (`--sans`) e JetBrains Mono (`--mono`), largura máxima `--max: 1160px`.
+- Cores, fontes e medidas via **custom properties em `:root`**, no topo do `style.css` de cada página (seção `DESIGN TOKENS`). Não use valores de cor soltos quando existir um token.
+- Página principal: tema escuro (`--bg: #080808`), fontes Poppins (`--sans`) e JetBrains Mono (`--mono`), largura máxima `--max: 1160px`. Textos devem ter contraste mínimo de 4.5:1 (WCAG AA).
 - Nomes de classes em **kebab-case**, estilo BEM-light (`.header-inner`, `.demo-card`, `.card-title`); estados como classes (`.scrolled`, `.active`, `.featured`).
 - Seções do CSS separadas por comentários em caixa alta: `/* --- NOME DA SEÇÃO --- */`.
-- `.container` com `width: min(calc(100% - 32px), var(--max))` para gutter responsivo.
-- Mobile first e respeito a `prefers-reduced-motion` em animações.
-- Fontes: Google Fonts com `display=swap` e carregamento não bloqueante, ou fontes locais `.woff2` (como em `demo/gym/assets/fonts`).
+- `.container` com `width: min(calc(100% - var(--gutter)), var(--max))` para gutter responsivo.
+- Mobile first, hover só dentro de `@media (hover: hover)` quando fizer diferença no toque, e respeito a `prefers-reduced-motion`.
+- Fontes **auto-hospedadas** em `assets/fonts/` (`.woff2`, subset latin, `font-display: swap`), com `preload` apenas da fonte do texto principal. Nada de Google Fonts por CDN.
 
 ## Convenções de JavaScript
 
@@ -106,18 +136,20 @@ public/                     # Reservado para arquivos públicos (og-image etc.)
 - Sempre verifique se o elemento existe antes de usar (`if (!el) return;`).
 - Listeners de scroll com `{ passive: true }` e `requestAnimationFrame` (flag `ticking`).
 - Prefira alternar classes a manipular estilos inline.
+- Menus mobile: `<button>` com `aria-controls`/`aria-expanded`, fecham com Esc, overlay e clique em link; o painel fechado fica com `visibility: hidden` (fora da ordem de foco).
 - Comentários e JSDoc curtos em português.
-- Scripts carregados com `defer`.
+- Scripts carregados com `defer` no `<head>`.
 
 ## Performance e assets
 
-- Imagens em **`.webp`**, com versão mobile quando for imagem de destaque (`hero-bg-mobile.webp`) e `preload` do hero.
-- CSS crítico inline + CSS principal carregado de forma assíncrona é aceitável em demos (padrão do `demo/gym`).
+- Imagens em **`.webp`** no tamanho em que são exibidas (no máximo ~2x), com versão mobile **em retrato** para heros de tela cheia (`hero-bg-mobile.webp`) e `preload` do hero.
+- Nada de hotlink de imagens (Unsplash etc.): baixe, converta e sirva de `assets/img/`.
 - Mantenha as páginas leves: nada de trackers, bibliotecas ou fontes desnecessárias.
+- Dependências npm são **só de build** (`devDependencies`). Não adicione dependências de runtime, frameworks ou ferramentas novas sem pedido explícito.
 
 ## Testes / verificação
 
-Não há testes automatizados. Para validar, abra os arquivos localmente com um servidor estático a partir da raiz (ex.: `npx serve .` ou `python -m http.server`), já que os links das demos são absolutos (`/demo/...`). Verifique em largura mobile (~375px) e desktop.
+Não há testes automatizados além da validação do build. Para conferir, rode `npm run preview` e verifique em largura mobile (~375px) e desktop, incluindo o menu mobile e a navegação por teclado. O deploy preview do Netlify no PR é a verificação final.
 
 ## Textos (copy)
 
