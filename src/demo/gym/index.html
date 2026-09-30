@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Apex Gym | Centro de Treinamento</title>
+    <meta name="description" content="Apex Gym - Centro de treinamento e alta performance. Infraestrutura completa e consultoria técnica.">
+    <meta name="theme-color" content="#0a0a0a">
+    <!-- Demo fictícia: não deve aparecer no Google -->
+    <meta name="robots" content="noindex, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="https://stargolab.com.br/demo/gym/">
+    <meta property="og:title" content="Apex Gym | Seu corpo, seu império">
+    <meta property="og:description" content="Demonstração StargoLab. para academias e estúdios: estrutura, modalidades e agendamento pelo WhatsApp.">
+    <meta property="og:image" content="https://stargolab.com.br/demo/gym/assets/img/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="preload" as="image" href="assets/img/hero-bg-mobile.webp" media="(max-width: 768px)">
+    <link rel="preload" as="image" href="assets/img/hero-bg.webp" media="(min-width: 769px)">
+    <link rel="preload" href="assets/fonts/montserrat-v31-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Habilita as animações de entrada só quando há JS (sem JS o conteúdo aparece normalmente) -->
+    <script>document.documentElement.classList.add('js');</script>
+    <script src="assets/js/main.js" defer></script>
+</head>
+
+<body>
+    <!-- Sprite de ícones reutilizados (referenciados com <use href="#...">) -->
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+        <symbol id="i-whatsapp" viewBox="0 0 640 640">
+            <path d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z" />
+        </symbol>
+        <symbol id="i-google" viewBox="0 0 640 640">
+            <path d="M564 325.8C564 467.3 467.1 568 324 568C186.8 568 76 457.2 76 320C76 182.8 186.8 72 324 72C390.8 72 447 96.5 490.3 136.9L422.8 201.8C334.5 116.6 170.3 180.6 170.3 320C170.3 406.5 239.4 476.6 324 476.6C422.2 476.6 459 406.2 464.8 369.7L324 369.7L324 284.4L560.1 284.4C562.4 297.1 564 309.3 564 325.8z" />
+        </symbol>
+    </svg>
+
+    <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+    <div class="page-wrapper">
+        <div class="nav-overlay"></div>
+
+        <header id="header" class="site-header">
+            <div class="container nav-container">
+                <a href="#home" class="logo-text" aria-label="Apex Gym, início">
+                    APEX <span class="text-gold">GYM</span>
+                </a>
+
+                <nav class="nav-menu" id="nav-menu" aria-label="Menu principal">
+                    <ul>
+                        <li><a href="#home" class="nav-link">Início</a></li>
+                        <li><a href="#estrutura" class="nav-link">Estrutura</a></li>
+                        <li><a href="#depoimentos" class="nav-link">Feedback</a></li>
+                        <li><a href="#modalidades" class="nav-link">Modalidades</a></li>
+                        <li>
+                            <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Vim%20pela%20demonstra%C3%A7%C3%A3o%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+                                class="btn-nav" target="_blank" rel="noopener noreferrer">Agendar Visita</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button type="button" class="hamburger" aria-label="Abrir menu" aria-controls="nav-menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </header>
+
+        <main id="main">
+            <!-- --- HERO --- -->
+            <section id="home" class="hero">
+                <div class="hero-bg-overlay"></div>
+
+                <div class="container hero-content">
+                    <div class="badge-glass reveal">
+                        <svg viewBox="0 0 640 640" width="24" height="24" aria-hidden="true" fill="#FFD700">
+                            <path d="M341.5 45.1C337.4 37.1 329.1 32 320.1 32C311.1 32 302.8 37.1 298.7 45.1L225.1 189.3L65.2 214.7C56.3 216.1 48.9 222.4 46.1 231C43.3 239.6 45.6 249 51.9 255.4L166.3 369.9L141.1 529.8C139.7 538.7 143.4 547.7 150.7 553C158 558.3 167.6 559.1 175.7 555L320.1 481.6L464.4 555C472.4 559.1 482.1 558.3 489.4 553C496.7 547.7 500.4 538.8 499 529.8L473.7 369.9L588.1 255.4C594.5 249 596.7 239.6 593.9 231C591.1 222.4 583.8 216.1 574.8 214.7L415 189.3L341.5 45.1z" />
+                        </svg>
+                        <span>4.9 no Google — Treinamento de Alta Performance</span>
+                    </div>
+
+                    <h1 class="reveal delay-1">
+                        SEU CORPO <br>
+                        <span class="outline-text">SEU IMPÉRIO</span>
+                    </h1>
+
+                    <p class="reveal delay-2">Domine sua mente, transforme seu corpo.<br>Treine na estrutura mais moderna da região.</p>
+
+                    <div class="hero-btns reveal delay-3">
+                        <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Quero%20agendar%20minha%20aula%20experimental."
+                            class="btn-primary" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" aria-hidden="true"><use href="#i-whatsapp" /></svg>
+                            Agendar Experimental
+                        </a>
+                        <a href="#modalidades" class="btn-text-only">
+                            Ver modalidades
+                            <svg viewBox="0 0 640 640" width="24" height="24" aria-hidden="true">
+                                <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="#estrutura" class="scroll-down" aria-label="Rolar para baixo">
+                    <span class="mouse"><span class="wheel"></span></span>
+                </a>
+            </section>
+
+            <!-- --- ESTRUTURA --- -->
+            <section id="estrutura" class="section-padding">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <span class="tagline">Nossa Base</span>
+                        <h2>ESTRUTURA <span class="text-gold">PRO</span></h2>
+                    </div>
+                    <div class="features-grid">
+                        <article class="feature-card glass-card reveal delay-1">
+                            <div class="icon-box">
+                                <svg viewBox="0 0 640 640" aria-hidden="true">
+                                    <path d="M128 195.9C128 176.1 144.1 160 163.9 160C173.4 160 182.5 163.8 189.3 170.5L205.5 186.7C184.5 225.6 188.1 274.2 216.4 309.7L215 311C205.6 320.4 205.6 335.6 215 344.9C224.4 354.2 239.6 354.3 248.9 344.9L409 185C418.4 175.6 418.4 160.4 409 151.1C399.6 141.8 384.4 141.7 375.1 151.1L373.8 152.4C338.3 124.1 289.7 120.5 250.8 141.5L234.5 125.3C215.8 106.5 190.4 96 163.9 96C108.7 96 64 140.7 64 195.9L64 512C64 529.7 78.3 544 96 544C113.7 544 128 529.7 128 512L128 195.9zM320 416C337.7 416 352 401.7 352 384C352 366.3 337.7 352 320 352C302.3 352 288 366.3 288 384C288 401.7 302.3 416 320 416zM384 480C384 462.3 369.7 448 352 448C334.3 448 320 462.3 320 480C320 497.7 334.3 512 352 512C369.7 512 384 497.7 384 480zM384 352C401.7 352 416 337.7 416 320C416 302.3 401.7 288 384 288C366.3 288 352 302.3 352 320C352 337.7 366.3 352 384 352zM448 416C448 398.3 433.7 384 416 384C398.3 384 384 398.3 384 416C384 433.7 398.3 448 416 448C433.7 448 448 433.7 448 416zM448 288C465.7 288 480 273.7 480 256C480 238.3 465.7 224 448 224C430.3 224 416 238.3 416 256C416 273.7 430.3 288 448 288zM512 352C512 334.3 497.7 320 480 320C462.3 320 448 334.3 448 352C448 369.7 462.3 384 480 384C497.7 384 512 369.7 512 352zM544 320C561.7 320 576 305.7 576 288C576 270.3 561.7 256 544 256C526.3 256 512 270.3 512 288C512 305.7 526.3 320 544 320z" />
+                                </svg>
+                            </div>
+                            <h3>Conforto Total</h3>
+                            <p>Ambientes climatizados, vestiários individuais e espaço amplo projetado para o seu bem-estar.</p>
+                        </article>
+                        <article class="feature-card glass-card reveal delay-2">
+                            <div class="icon-box">
+                                <svg viewBox="0 0 640 640" aria-hidden="true">
+                                    <path d="M320 80C377.4 80 424 126.6 424 184C424 241.4 377.4 288 320 288C262.6 288 216 241.4 216 184C216 126.6 262.6 80 320 80zM96 152C135.8 152 168 184.2 168 224C168 263.8 135.8 296 96 296C56.2 296 24 263.8 24 224C24 184.2 56.2 152 96 152zM0 480C0 409.3 57.3 352 128 352C140.8 352 153.2 353.9 164.9 357.4C132 394.2 112 442.8 112 496L112 512C112 523.4 114.4 534.2 118.7 544L32 544C14.3 544 0 529.7 0 512L0 480zM521.3 544C525.6 534.2 528 523.4 528 512L528 496C528 442.8 508 394.2 475.1 357.4C486.8 353.9 499.2 352 512 352C582.7 352 640 409.3 640 480L640 512C640 529.7 625.7 544 608 544L521.3 544zM472 224C472 184.2 504.2 152 544 152C583.8 152 616 184.2 616 224C616 263.8 583.8 296 544 296C504.2 296 472 263.8 472 224zM160 496C160 407.6 231.6 336 320 336C408.4 336 480 407.6 480 496L480 512C480 529.7 465.7 544 448 544L192 544C174.3 544 160 529.7 160 512L160 496z" />
+                                </svg>
+                            </div>
+                            <h3>Acompanhamento Profissional</h3>
+                            <p>Nossa equipe de especialistas monitora seus treinos para garantir máxima eficiência e segurança.</p>
+                        </article>
+                        <article class="feature-card glass-card reveal delay-3">
+                            <div class="icon-box">
+                                <svg viewBox="0 0 640 640" aria-hidden="true">
+                                    <path d="M96 176C96 149.5 117.5 128 144 128C170.5 128 192 149.5 192 176L192 288L448 288L448 176C448 149.5 469.5 128 496 128C522.5 128 544 149.5 544 176L544 192L560 192C586.5 192 608 213.5 608 240L608 288C625.7 288 640 302.3 640 320C640 337.7 625.7 352 608 352L608 400C608 426.5 586.5 448 560 448L544 448L544 464C544 490.5 522.5 512 496 512C469.5 512 448 490.5 448 464L448 352L192 352L192 464C192 490.5 170.5 512 144 512C117.5 512 96 490.5 96 464L96 448L80 448C53.5 448 32 426.5 32 400L32 352C14.3 352 0 337.7 0 320C0 302.3 14.3 288 32 288L32 240C32 213.5 53.5 192 80 192L96 192L96 176z" />
+                                </svg>
+                            </div>
+                            <h3>Maquinário de Ponta</h3>
+                            <p>Equipamentos modernos e biomecânica avançada para entregar o estímulo muscular perfeito.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- DEPOIMENTOS --- -->
+            <!-- DADOS DE EXEMPLO: depoimentos fictícios, criados apenas para esta demonstração. -->
+            <section id="depoimentos" class="section-padding">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <span class="tagline">Prova Social</span>
+                        <h2>QUEM TREINA <span class="text-gold">CONFIA</span></h2>
+                    </div>
+
+                    <div class="reviews-grid">
+                        <article class="review-card glass-card reveal">
+                            <div class="review-top">
+                                <div class="stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
+                                <div class="google-icon"><svg aria-hidden="true"><use href="#i-google" /></svg></div>
+                            </div>
+                            <p class="review-text">"Academia excelente, muito espaçosa, vários equipamentos de ponta e equipe atenciosa do início ao fim do treino."</p>
+                            <div class="review-author">
+                                <div class="avatar" aria-hidden="true">D</div>
+                                <div>
+                                    <h3>Diego S.</h3>
+                                    <span>Local Guide</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="review-card glass-card reveal delay-1">
+                            <div class="review-top">
+                                <div class="stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
+                                <div class="google-icon"><svg aria-hidden="true"><use href="#i-google" /></svg></div>
+                            </div>
+                            <p class="review-text">"A melhor estrutura da região sem dúvidas. Atendimento impecável e instrutores sempre dispostos a ajudar."</p>
+                            <div class="review-author">
+                                <div class="avatar" aria-hidden="true">J</div>
+                                <div>
+                                    <h3>Juliana H.</h3>
+                                    <span>Membro ativo</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <p class="demo-note">*Avaliações ilustrativas, criadas para esta demonstração.</p>
+
+                    <div class="center-btn reveal">
+                        <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20a%20estrutura."
+                            target="_blank" rel="noopener noreferrer" class="link-underline">Conheça nossa estrutura completa</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- --- MODALIDADES --- -->
+            <section id="modalidades" class="section-padding">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <span class="tagline">O que oferecemos</span>
+                        <h2>ESCOLHA SUA <span class="text-gold">BATALHA</span></h2>
+                    </div>
+                    <div class="carousel-wrapper reveal delay-1">
+                        <div class="carousel-container">
+                            <article class="class-card card-musculacao">
+                                <h3>Musculação</h3>
+                                <p>Construa força e definição com acompanhamento técnico de alto nível.</p>
+                                <div class="card-line"></div>
+                                <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Gostaria%20de%20saber%20os%20planos%20de%20Muscula%C3%A7%C3%A3o."
+                                    class="btn-mini" target="_blank" rel="noopener noreferrer" aria-label="Ver detalhes de Musculação">Ver Detalhes</a>
+                            </article>
+                            <article class="class-card card-boxe">
+                                <h3>Boxe</h3>
+                                <p>Libere o estresse, queime calorias e domine a arte da defesa pessoal.</p>
+                                <div class="card-line"></div>
+                                <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Tenho%20interesse%20nas%20aulas%20de%20Boxe."
+                                    class="btn-mini" target="_blank" rel="noopener noreferrer" aria-label="Ver detalhes de Boxe">Ver Detalhes</a>
+                            </article>
+                            <article class="class-card card-dance">
+                                <h3>Fit Dance</h3>
+                                <p>Transforme seu cardio em diversão com as coreografias que são tendência.</p>
+                                <div class="card-line"></div>
+                                <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Quero%20saber%20os%20hor%C3%A1rios%20do%20Fit%20Dance."
+                                    class="btn-mini" target="_blank" rel="noopener noreferrer" aria-label="Ver detalhes de Fit Dance">Ver Detalhes</a>
+                            </article>
+                            <article class="class-card card-funcional">
+                                <h3>Funcional</h3>
+                                <p>Prepare seu corpo para qualquer desafio com treinos dinâmicos e intensos.</p>
+                                <div class="card-line"></div>
+                                <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Gostaria%20de%20conhecer%20o%20Treino%20Funcional."
+                                    class="btn-mini" target="_blank" rel="noopener noreferrer" aria-label="Ver detalhes de Funcional">Ver Detalhes</a>
+                            </article>
+                        </div>
+                        <div class="center-btn">
+                            <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Tenho%20d%C3%BAvidas%20sobre%20os%20planos."
+                                class="btn-primary" target="_blank" rel="noopener noreferrer">
+                                <svg width="24" height="24" aria-hidden="true"><use href="#i-whatsapp" /></svg>
+                                Falar com o Atendimento
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-flex">
+                    <div class="footer-brand">
+                        <h2>APEX GYM</h2>
+                        <p>Av. Principal, 1000 — Centro</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg viewBox="0 0 640 640" aria-hidden="true">
+                                <path d="M320.3 205C256.8 204.8 205.2 256.2 205 319.7C204.8 383.2 256.2 434.8 319.7 435C383.2 435.2 434.8 383.8 435 320.3C435.2 256.8 383.8 205.2 320.3 205zM319.7 245.4C360.9 245.2 394.4 278.5 394.6 319.7C394.8 360.9 361.5 394.4 320.3 394.6C279.1 394.8 245.6 361.5 245.4 320.3C245.2 279.1 278.5 245.6 319.7 245.4zM413.1 200.3C413.1 185.5 425.1 173.5 439.9 173.5C454.7 173.5 466.7 185.5 466.7 200.3C466.7 215.1 454.7 227.1 439.9 227.1C425.1 227.1 413.1 215.1 413.1 200.3zM542.8 227.5C541.1 191.6 532.9 159.8 506.6 133.6C480.4 107.4 448.6 99.2 412.7 97.4C375.7 95.3 264.8 95.3 227.8 97.4C192 99.1 160.2 107.3 133.9 133.5C107.6 159.7 99.5 191.5 97.7 227.4C95.6 264.4 95.6 375.3 97.7 412.3C99.4 448.2 107.6 480 133.9 506.2C160.2 532.4 191.9 540.6 227.8 542.4C264.8 544.5 375.7 544.5 412.7 542.4C448.6 540.7 480.4 532.5 506.6 506.2C532.8 480 541 448.2 542.8 412.3C544.9 375.3 544.9 264.5 542.8 227.5zM495 452C487.2 471.6 472.1 486.7 452.4 494.6C422.9 506.3 352.9 503.6 320.3 503.6C287.7 503.6 217.6 506.2 188.2 494.6C168.6 486.8 153.5 471.7 145.6 452C133.9 422.5 136.6 352.5 136.6 319.9C136.6 287.3 134 217.2 145.6 187.8C153.4 168.2 168.5 153.1 188.2 145.2C217.7 133.5 287.7 136.2 320.3 136.2C352.9 136.2 423 133.6 452.4 145.2C472 153 487.1 168.1 495 187.8C506.7 217.3 504 287.3 504 319.9C504 352.5 506.7 422.6 495 452z" />
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Vim%20pelo%20site." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                            <svg aria-hidden="true"><use href="#i-whatsapp" /></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>© 2026 Apex Gym. Desenvolvido por <a href="/"><strong>StargoLab.</strong></a></p>
+                </div>
+            </div>
+        </footer>
+
+        <a href="https://wa.me/5511990067946?text=Ol%C3%A1!%20Vim%20pela%20demonstra%C3%A7%C3%A3o%20da%20academia."
+            class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+            <svg aria-hidden="true"><use href="#i-whatsapp" /></svg>
+            <span class="tooltip" aria-hidden="true">Falar no Atendimento</span>
+        </a>
+    </div>
+</body>
+</html>

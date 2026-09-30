@@ -39,7 +39,8 @@ function initCopyEmail() {
 
   if (!copyBtn || !emailSpan) return;
 
-  const emailText = 'contact@stargolab.com.br';
+  // O e-mail vem do próprio HTML (fonte única)
+  const emailText = emailSpan.textContent.trim();
   let resetTimer;
 
   const openMail = () => {

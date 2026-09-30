@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{NOME}} | Demonstração StargoLab.</title>
+  <meta name="description" content="{{NOME}} — demonstração StargoLab. para {{SLUG}}. Descreva aqui o negócio em uma frase.">
+  <meta name="theme-color" content="#111111">
+  <!-- Demo fictícia: não deve aparecer no Google -->
+  <meta name="robots" content="noindex, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://stargolab.com.br/demo/{{SLUG}}/">
+  <meta property="og:title" content="{{NOME}} — Demonstração StargoLab.">
+  <meta property="og:description" content="Descreva aqui o negócio em uma frase.">
+  <!-- Gere uma imagem 1200x630 em assets/img/og-image.jpg -->
+  <meta property="og:image" content="https://stargolab.com.br/demo/{{SLUG}}/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Habilita as animações de entrada só quando há JS (sem JS o conteúdo aparece normalmente) -->
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <!-- Sprite de ícones reutilizados (referenciados com <use href="#...">) -->
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-whatsapp" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.77.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.14c-.24.68-1.4 1.32-1.93 1.4-.49.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.15.07.15.12.32.02.52-.1.19-.15.31-.3.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.15.46.13.63-.08.17-.21.72-.84.91-1.13.19-.29.38-.24.64-.14.26.1 1.65.78 1.94.92.29.14.48.21.55.33.07.12.07.68-.17 1.35Z"/>
+    </symbol>
+  </svg>
+
+  <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+  <div class="nav-overlay"></div>
+
+  <header id="header" class="site-header">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo">{{NOME}}</a>
+
+      <nav class="nav-menu" id="nav-menu" aria-label="Menu principal">
+        <ul class="nav-list">
+          <li><a href="#servicos" class="nav-link">Serviços</a></li>
+          <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+          <li><a href="{{WHATSAPP}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Agendar</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" class="hamburger" aria-label="Abrir menu" aria-controls="nav-menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- --- HERO --- -->
+    <section id="inicio" class="hero">
+      <div class="container">
+        <p class="eyebrow reveal">Bairro · Cidade — UF</p>
+        <h1 class="reveal delay-1">Promessa principal do negócio em uma frase.</h1>
+        <p class="hero-lead reveal delay-2">Complemento curto: para quem é, o que entrega e por que confiar.</p>
+        <div class="hero-actions reveal delay-3">
+          <a href="{{WHATSAPP}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Agendar pelo WhatsApp
+          </a>
+          <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- SERVIÇOS --- -->
+    <section id="servicos" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Serviços</p>
+          <h2 class="section-title">O que oferecemos</h2>
+        </div>
+        <div class="cards-grid">
+          <article class="card reveal">
+            <h3 class="card-title">Serviço 1</h3>
+            <p class="card-text">Benefício claro para o cliente, em uma ou duas frases.</p>
+          </article>
+          <article class="card reveal delay-1">
+            <h3 class="card-title">Serviço 2</h3>
+            <p class="card-text">Benefício claro para o cliente, em uma ou duas frases.</p>
+          </article>
+          <article class="card reveal delay-2">
+            <h3 class="card-title">Serviço 3</h3>
+            <p class="card-text">Benefício claro para o cliente, em uma ou duas frases.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- --- DEPOIMENTOS --- -->
+    <section id="depoimentos" class="section section-alt">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="eyebrow">Depoimentos</p>
+          <h2 class="section-title">Quem conhece, recomenda</h2>
+        </div>
+        <div class="cards-grid">
+          <figure class="card reveal">
+            <blockquote class="card-text">"Depoimento curto e específico sobre a experiência."</blockquote>
+            <figcaption class="review-author">Nome S. · Cliente desde 2024</figcaption>
+          </figure>
+        </div>
+        <p class="demo-note">*Depoimentos ilustrativos, criados para esta demonstração.</p>
+      </div>
+    </section>
+
+    <!-- --- CTA FINAL --- -->
+    <section class="section final-cta">
+      <div class="container reveal">
+        <h2 class="section-title">Chamada final para ação.</h2>
+        <a href="{{WHATSAPP}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 {{NOME}}. Desenvolvido por <a href="/">StargoLab.</a></p>
+    </div>
+  </footer>
+
+  <a href="{{WHATSAPP}}" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
+</body>
+</html>

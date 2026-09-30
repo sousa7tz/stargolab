@@ -1,0 +1,11 @@
+# Dependências e saída do build
+node_modules/
+dist/
+
+# Netlify CLI
+.netlify/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+*.log
