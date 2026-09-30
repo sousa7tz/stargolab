@@ -162,16 +162,47 @@ function lintHtml(html, file) {
     if (!/rel="[^"]*noopener/.test(tag)) fail(`link com target="_blank" sem rel="noopener": ${tag.slice(0, 80)}…`);
   }
 
+  // Caminhos locais relativos: funcionam em qualquer raiz (Netlify, Live Server, subpasta).
+  // Só a 404 usa absolutos, porque é servida em qualquer URL.
+  if (path.basename(file) !== '404.html') {
+    for (const [, attr, ref] of html.matchAll(/\s(href|src)="(\/(?!\/)[^"]*)"/g)) {
+      fail(`${attr} com caminho absoluto "${ref}" — use caminho relativo`);
+    }
+  }
+
   // <use href="#id"> precisa apontar para um <symbol> existente
   for (const [, id] of html.matchAll(/<use\b[^>]*href="#([^"]+)"/g)) {
     if (!html.includes(`id="${id}"`)) fail(`ícone #${id} não existe no sprite`);
   }
 }
 
+/**
+ * Troca <link rel="stylesheet" href="…" data-inline> pelo CSS já minificado em um <style>.
+ * Os url() relativos viram absolutos a partir da raiz, pois a página pode ser servida em qualquer URL.
+ */
+async function inlineStylesheet(tag, file) {
+  const ref = tag.match(/\shref="([^"]+)"/)?.[1];
+  const resolved = ref && (await resolveLocal(ref, file));
+  if (!resolved?.info?.isFile()) {
+    errors.push(`${rel(file)}: data-inline aponta para CSS inexistente → ${ref}`);
+    return tag;
+  }
+
+  const cssDir = path.dirname(resolved.file);
+  const css = (await readFile(resolved.file, 'utf8')).replace(
+    /url\((["']?)([^"')]+)\1\)/g,
+    (match, quote, url) => (EXTERNAL.test(url) || url.startsWith('/')
+      ? match
+      : `url(${quote}/${rel(path.join(cssDir, url.split('?')[0]))}${url.includes('?') ? `?${url.split('?')[1]}` : ''}${quote})`),
+  );
+  return `<style>${css}</style>`;
+}
+
 async function buildHtml(file) {
   // Comentários saem antes de tudo (não são validados nem publicados)
   let html = (await readFile(file, 'utf8')).replace(/<!--[\s\S]*?-->/g, '');
   lintHtml(html, file);
+  html = await replaceAsync(html, /<link\b[^>]*\sdata-inline\b[^>]*>/g, (tag) => inlineStylesheet(tag, file));
 
   // Versiona assets referenciados em href/src
   html = await replaceAsync(

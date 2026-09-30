@@ -60,5 +60,5 @@ console.log(`✔ Demo criada em src/demo/${slug}/
 Próximos passos:
   1. Ajuste tokens (cores/fontes) em assets/css/style.css e os textos do index.html.
   2. Adicione imagens .webp em assets/img/ (hero com versão mobile + preload) e a og-image.jpg (1200x630).
-  3. Linke a demo na home (src/index.html, seção #demos) com barra final: /demo/${slug}/
+  3. Linke a demo na home (src/index.html, seção #demos) com caminho relativo e barra final: demo/${slug}/
   4. Adicione o escopo "demo" no commit e rode "npm run build" para validar.`);

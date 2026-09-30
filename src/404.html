@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#080808">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <!-- Caminhos absolutos: esta página é servida em qualquer URL inexistente -->
-  <link rel="preload" href="/assets/fonts/poppins-v24-latin-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- Caminhos absolutos: esta página é servida em qualquer URL inexistente.
+       data-inline: o build embute o CSS aqui, então o layout não depende do caminho. -->
+  <link rel="stylesheet" href="/assets/css/style.css" data-inline>
 </head>
 <body>
   <header class="header">

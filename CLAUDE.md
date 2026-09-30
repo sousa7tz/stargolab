@@ -83,7 +83,7 @@ netlify.toml                  # Comando de build, pasta publicada, headers e red
 ```
 
 - Demos atuais: `gym` (Apex Gym), `clinic` (Lúmina Odontologia) e `barbershop` (Navalha Barber Club).
-- A home linka as demos com caminho absoluto **e barra final**: `/demo/<nicho>/` (sem a barra, o Netlify responde com um redirect 301 extra).
+- Links e assets locais usam **caminho relativo** (`demo/<nicho>/` na home, `../../` para voltar das demos), para o site funcionar em qualquer raiz: Netlify, `npm run preview` ou Live Server abrindo a `dist/` como subpasta. Links de pasta levam **barra final** (sem ela, o Netlify responde com um redirect 301 extra). A única exceção é a `404.html`, que usa caminhos absolutos porque é servida em qualquer URL.
 - Para criar uma demo nova: `npm run new:demo -- <nicho> "<Nome do negócio>"` e depois linkar na seção `#demos` da home.
 
 ## Comandos
@@ -102,9 +102,11 @@ O `scripts/build.mjs` copia `src/` para `dist/` e:
 
 1. Minifica CSS (lightningcss — embute `@import` e mantém fallbacks como `vh` antes de `svh`), JS (terser) e HTML (html-minifier-terser). Não existem mais arquivos `.min` no repositório.
 2. Acrescenta `?v=<hash do conteúdo>` a todo asset local referenciado no HTML e no CSS e gera `dist/_headers` com cache imutável de 1 ano para as pastas `assets/`. **Não é preciso renomear arquivos ao alterá-los** — o hash muda sozinho.
-3. **Falha o build** se encontrar: link/asset local quebrado, `<img>` sem `alt`/`width`/`height`, `target="_blank"` sem `rel="noopener"`, `<use href="#id">` sem símbolo no sprite, página sem `lang`, `<title>`, `meta description`, `viewport` ou `theme-color`, ou JSON-LD inválido.
+3. **Falha o build** se encontrar: link/asset local quebrado, `<img>` sem `alt`/`width`/`height`, `target="_blank"` sem `rel="noopener"`, `<use href="#id">` sem símbolo no sprite, caminho local absoluto (`/...`) fora da `404.html`, página sem `lang`, `<title>`, `meta description`, `viewport` ou `theme-color`, ou JSON-LD inválido.
 
 Arquivos CSS cujo nome começa com `_` são parciais: só entram via `@import` e não são publicados.
+
+`<link rel="stylesheet" href="…" data-inline>` faz o build embutir o CSS minificado na página, com os `url()` convertidos para caminhos a partir da raiz. É usado na `404.html`, que é servida em qualquer URL e por isso não pode depender de um caminho para o CSS.
 
 ## Convenções de HTML
 
