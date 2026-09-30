@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initCopyEmail();
+  initReveal();
 });
 
 /**
@@ -12,23 +13,25 @@ function initHeaderScroll() {
 
   let ticking = false;
 
+  const update = () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+    ticking = false;
+  };
+
   window.addEventListener('scroll', () => {
     if (!ticking) {
-      window.requestAnimationFrame(() => {
-        if (window.scrollY > 40) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-        ticking = false;
-      });
+      window.requestAnimationFrame(update);
       ticking = true;
     }
   }, { passive: true });
+
+  // Página recarregada já rolada (ex.: voltar do WhatsApp)
+  update();
 }
 
 /**
  * Copia o e-mail corporativo com feedback visual
+ * (fallback para mailto quando a Clipboard API não está disponível)
  */
 function initCopyEmail() {
   const copyBtn = document.getElementById('copy-email-btn');
@@ -36,29 +39,43 @@ function initCopyEmail() {
 
   if (!copyBtn || !emailSpan) return;
 
+  const emailText = 'contact@stargolab.com.br';
+  let resetTimer;
+
+  const openMail = () => {
+    window.location.href = `mailto:${emailText}`;
+  };
+
   copyBtn.addEventListener('click', () => {
-    const emailText = 'contact@stargolab.com.br';
+    if (!navigator.clipboard || !window.isSecureContext) {
+      openMail();
+      return;
+    }
 
     navigator.clipboard.writeText(emailText).then(() => {
-      const originalText = emailSpan.innerText;
-      emailSpan.innerText = '✓ E-mail copiado!';
+      emailSpan.textContent = '✓ E-mail copiado!';
 
-      setTimeout(() => {
-        emailSpan.innerText = originalText;
+      // Reinicia o timer em cliques repetidos, sem perder o texto original
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => {
+        emailSpan.textContent = emailText;
       }, 2000);
-    }).catch(err => {
-      console.error('Erro ao copiar e-mail: ', err);
-    });
+    }).catch(openMail);
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Configuração do Observador de Scroll
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -50px 0px', // Dispara um pouco antes do elemento encostar no fundo da tela
-    threshold: 0.15 // Dispara quando 15% do elemento estiver visível
-  };
+/**
+ * Anima elementos .reveal ao entrarem na viewport
+ */
+function initReveal() {
+  const revealElements = document.querySelectorAll('.reveal');
+  if (!revealElements.length) return;
+
+  // Sem suporte: exibe tudo direto para não esconder conteúdo
+  if (!('IntersectionObserver' in window)) {
+    revealElements.forEach(el => el.classList.add('active'));
+    return;
+  }
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -68,9 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, {
+    root: null,
+    rootMargin: '0px 0px -40px 0px', // Dispara um pouco antes do elemento encostar no fundo da tela
+    threshold: 0.1 // Dispara quando 10% do elemento estiver visível
+  });
 
-  // Aplica em todos os elementos com a classe .reveal
-  const revealElements = document.querySelectorAll('.reveal');
   revealElements.forEach(el => revealObserver.observe(el));
-});
+}
