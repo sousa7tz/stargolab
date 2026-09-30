@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Navalha Barber Club - Barbearia na Vila Madalena, SP. Corte, barba e pigmentação com profissionais experientes, ambiente climatizado e agendamento pelo WhatsApp.">
-    <meta name="theme-color" content="#0b0b0c">
+    <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)">
 
     <title>Navalha Barber Club | Barbearia na Vila Madalena, SP</title>
 
@@ -21,8 +22,13 @@
 
     <link rel="preload" as="image" href="assets/hero-bg-mobile.webp" media="(max-width: 768px)">
     <link rel="preload" as="image" href="assets/hero-bg.webp" media="(min-width: 769px)">
-    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-v31-latin-900.woff2" crossorigin>
 
+    <!-- FOTOS DE EXEMPLO: Unsplash (licença Unsplash, uso gratuito inclusive comercial).
+         IDs em images.unsplash.com/photo-<id>. Troque pelas fotos reais do cliente.
+         hero-bg / hero-bg-mobile / og-image: 1585747860715-2ba37e788b70
+         barbeiro-1: 1598524374912-6b0b0bab43dd · barbeiro-2: 1596728325488-58c87691e9af · barbeiro-3: 1553521041-d168abd31de3
+         corte-1: 1568339434343-2a640a1a9946 · corte-2: 1599011176306-4a96f1516d4d · corte-3: 1562004760-aceed7bb0fe3
+         corte-4: 1567894340315-735d7c361db0 · corte-5: 1630827020718-3433092696e7 · corte-6: 1578390432942-d323db577792 -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="css/style.min.css">
     <!-- Habilita as animações de entrada só quando há JS (sem JS o conteúdo aparece normalmente) -->
@@ -30,19 +36,37 @@
 </head>
 
 <body>
+    <!-- Sprite de ícones reutilizados (referenciados com <use href="#...">) -->
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+        <symbol id="i-whatsapp" viewBox="0 0 640 640">
+            <path fill="currentColor" d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z" />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></g>
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m5 12 5 5L20 7" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+        </symbol>
+    </svg>
+
     <a href="#main" class="skip-link">Pular para o conteúdo</a>
 
     <div class="page-wrapper">
         <div class="nav-overlay"></div>
 
-        <header id="header">
-            <div class="container nav-container">
-                <a href="#inicio" class="logo-text" aria-label="Navalha Barber Club, início">
-                    NAVALHA <span class="text-gold">BARBER CLUB</span>
+        <header id="header" class="site-header">
+            <div class="container header-inner">
+                <a href="#inicio" class="logo" aria-label="Navalha Barber Club, início">
+                    <span class="logo-mark" aria-hidden="true"></span>
+                    <span class="logo-name">Navalha</span>
+                    <span class="logo-sub">Barber Club</span>
                 </a>
 
                 <nav class="nav-menu" id="nav-menu" aria-label="Menu principal">
-                    <ul>
+                    <ul class="nav-list">
                         <li><a href="#inicio" class="nav-link">Início</a></li>
                         <li><a href="#servicos" class="nav-link">Serviços</a></li>
                         <li><a href="#equipe" class="nav-link">Equipe</a></li>
@@ -51,7 +75,7 @@
                         <li><a href="#contato" class="nav-link">Contato</a></li>
                         <li>
                             <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Navalha%20Barber%20Club."
-                                class="btn-nav" target="_blank" rel="noopener">
+                                class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
                                 Agendar horário
                             </a>
                         </li>
@@ -67,380 +91,348 @@
         </header>
 
         <main id="main">
-        <!-- HERO -->
+        <!-- --- HERO --- -->
         <section id="inicio" class="hero">
-            <div class="hero-bg-overlay"></div>
-
             <div class="container hero-content">
-                <div class="badge-glass reveal">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-fill">
-                        <path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z" />
+                <p class="hero-badge reveal">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+                        <path fill="currentColor" d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8z" />
                     </svg>
-                    <span>4,9 no Google · +1.200 clientes atendidos</span>
-                </div>
+                    4,9 no Google · +1.200 clientes atendidos
+                </p>
 
-                <h1 class="reveal delay-1">
+                <h1 class="hero-title reveal delay-1">
                     Corte na régua.<br>
-                    <span class="outline-text">Barba de respeito.</span>
+                    <span class="text-accent">Barba de respeito.</span>
                 </h1>
 
-                <p class="reveal delay-2">Barbearia clássica com atendimento moderno na Vila Madalena.
+                <p class="hero-lead reveal delay-2">Barbearia clássica com atendimento moderno na Vila Madalena.
                     Cadeira confortável, cerveja gelada e profissionais que entendem de estilo.</p>
 
-                <div class="hero-btns reveal delay-3">
+                <div class="hero-actions reveal delay-3">
                     <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Navalha%20Barber%20Club."
-                        class="btn-primary" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 640 640" aria-hidden="true" class="icon-fill">
-                            <path d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z" />
-                        </svg>
+                        class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" aria-hidden="true"><use href="#i-whatsapp" /></svg>
                         Agendar pelo WhatsApp
                     </a>
-                    <a href="#servicos" class="btn-outline">
+                    <a href="#servicos" class="btn btn-ghost btn-lg">
                         Ver serviços
-                        <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
-                            <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
+                        <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
                     </a>
                 </div>
             </div>
-
-            <a href="#servicos" class="scroll-down" aria-label="Rolar para os serviços">
-                <span class="mouse"><span class="wheel"></span></span>
-            </a>
         </section>
 
-        <!-- SERVIÇOS -->
-        <section id="servicos" class="section-padding">
+        <!-- --- SERVIÇOS --- -->
+        <section id="servicos" class="section">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="tagline">Nossos serviços</span>
-                    <h2>Cada detalhe <span class="text-gold">no lugar</span></h2>
-                    <p class="section-sub">Valores e tempos médios por atendimento. Todos os serviços incluem lavagem e finalização.</p>
+                    <p class="eyebrow">Nossos serviços</p>
+                    <h2 class="section-title">Cada detalhe <span class="text-accent">no lugar.</span></h2>
+                    <p class="section-lead">Valores e tempos médios por atendimento. Todos os serviços incluem lavagem e finalização.</p>
                 </div>
 
                 <div class="services-grid">
-                    <article class="service-card card reveal">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <article class="card service-card reveal">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <circle cx="6" cy="6" r="3" /><circle cx="6" cy="18" r="3" />
                                 <path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12" />
                             </svg>
                         </div>
-                        <h3>Corte</h3>
-                        <p>Degradê, social, tesoura ou máquina. Consultoria de visagismo para achar o corte certo pro seu rosto.</p>
+                        <h3 class="card-title">Corte</h3>
+                        <p class="card-text">Degradê, social, tesoura ou máquina. Consultoria de visagismo para achar o corte certo pro seu rosto.</p>
                         <div class="service-meta">
-                            <span class="duration">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                40 min
-                            </span>
-                            <span class="price">R$ 50</span>
+                            <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>40 min</span>
+                            <span class="service-price">R$ 50</span>
                         </div>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%3A%20Corte."
-                            class="btn-mini" target="_blank" rel="noopener" aria-label="Agendar corte pelo WhatsApp">Agendar</a>
+                            class="btn btn-secondary btn-sm btn-block" target="_blank" rel="noopener noreferrer" aria-label="Agendar corte pelo WhatsApp">Agendar</a>
                     </article>
 
-                    <article class="service-card card reveal delay-1">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <article class="card service-card reveal delay-1">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <path d="M3 15 15 3l3 3L8 16H3z" /><path d="M8 16v5M11.5 13.5 14 16" />
                             </svg>
                         </div>
-                        <h3>Barba</h3>
-                        <p>Toalha quente, navalha e óleo hidratante. Desenho alinhado ao formato do seu rosto.</p>
+                        <h3 class="card-title">Barba</h3>
+                        <p class="card-text">Toalha quente, navalha e óleo hidratante. Desenho alinhado ao formato do seu rosto.</p>
                         <div class="service-meta">
-                            <span class="duration">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                30 min
-                            </span>
-                            <span class="price">R$ 40</span>
+                            <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>30 min</span>
+                            <span class="service-price">R$ 40</span>
                         </div>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%3A%20Barba."
-                            class="btn-mini" target="_blank" rel="noopener" aria-label="Agendar barba pelo WhatsApp">Agendar</a>
+                            class="btn btn-secondary btn-sm btn-block" target="_blank" rel="noopener noreferrer" aria-label="Agendar barba pelo WhatsApp">Agendar</a>
                     </article>
 
-                    <article class="service-card card card-highlight reveal delay-2">
+                    <article class="card service-card featured reveal delay-2">
                         <span class="card-badge">Mais pedido</span>
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <path d="M3 19h18M4 16 3 7l5 4 4-7 4 7 5-4-1 9z" />
                             </svg>
                         </div>
-                        <h3>Corte + Barba</h3>
-                        <p>O combo completo com toalha quente e finalização. Sai daqui pronto pra qualquer compromisso.</p>
+                        <h3 class="card-title">Corte + Barba</h3>
+                        <p class="card-text">O combo completo com toalha quente e finalização. Sai daqui pronto pra qualquer compromisso.</p>
                         <div class="service-meta">
-                            <span class="duration">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                70 min
-                            </span>
-                            <span class="price">R$ 80</span>
+                            <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>70 min</span>
+                            <span class="service-price">R$ 80</span>
                         </div>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%3A%20Corte%20%2B%20Barba."
-                            class="btn-mini" target="_blank" rel="noopener" aria-label="Agendar corte e barba pelo WhatsApp">Agendar</a>
+                            class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener noreferrer" aria-label="Agendar corte e barba pelo WhatsApp">Agendar</a>
                     </article>
 
-                    <article class="service-card card reveal">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <article class="card service-card reveal">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z" /><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5" />
                             </svg>
                         </div>
-                        <h3>Pigmentação</h3>
-                        <p>Preenche falhas na barba e no cabelo com acabamento natural, sem aquele efeito "pintado".</p>
+                        <h3 class="card-title">Pigmentação</h3>
+                        <p class="card-text">Preenche falhas na barba e no cabelo com acabamento natural, sem aquele efeito "pintado".</p>
                         <div class="service-meta">
-                            <span class="duration">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                30 min
-                            </span>
-                            <span class="price">R$ 35</span>
+                            <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>30 min</span>
+                            <span class="service-price">R$ 35</span>
                         </div>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%3A%20Pigmenta%C3%A7%C3%A3o."
-                            class="btn-mini" target="_blank" rel="noopener" aria-label="Agendar pigmentação pelo WhatsApp">Agendar</a>
+                            class="btn btn-secondary btn-sm btn-block" target="_blank" rel="noopener noreferrer" aria-label="Agendar pigmentação pelo WhatsApp">Agendar</a>
                     </article>
 
-                    <article class="service-card card reveal delay-1">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <article class="card service-card reveal delay-1">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <path d="M2 14s3.5-5 10-5 10 5 10 5-3.5 5-10 5-10-5-10-5z" /><circle cx="12" cy="14" r="2.5" /><path d="M4 6c2.5-1.5 5-2 8-2s5.5.5 8 2" />
                             </svg>
                         </div>
-                        <h3>Sobrancelha</h3>
-                        <p>Limpeza e alinhamento discretos na navalha ou pinça. Masculino, sem exagero.</p>
+                        <h3 class="card-title">Sobrancelha</h3>
+                        <p class="card-text">Limpeza e alinhamento discretos na navalha ou pinça. Masculino, sem exagero.</p>
                         <div class="service-meta">
-                            <span class="duration">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                15 min
-                            </span>
-                            <span class="price">R$ 20</span>
+                            <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>15 min</span>
+                            <span class="service-price">R$ 20</span>
                         </div>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%3A%20Sobrancelha."
-                            class="btn-mini" target="_blank" rel="noopener" aria-label="Agendar sobrancelha pelo WhatsApp">Agendar</a>
+                            class="btn btn-secondary btn-sm btn-block" target="_blank" rel="noopener noreferrer" aria-label="Agendar sobrancelha pelo WhatsApp">Agendar</a>
                     </article>
 
-                    <article class="service-card card reveal delay-2">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <article class="card service-card reveal delay-2">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <path d="M5 20c0-9 5-15 15-15 0 10-6 15-14 15" /><path d="M5 20l8-8" />
                             </svg>
                         </div>
-                        <h3>Tratamento capilar</h3>
-                        <p>Hidratação, esfoliação do couro cabeludo e massagem relaxante para cabelo e barba mais saudáveis.</p>
+                        <h3 class="card-title">Tratamento capilar</h3>
+                        <p class="card-text">Hidratação, esfoliação do couro cabeludo e massagem relaxante para cabelo e barba mais saudáveis.</p>
                         <div class="service-meta">
-                            <span class="duration">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-                                40 min
-                            </span>
-                            <span class="price">R$ 60</span>
+                            <span class="service-duration"><svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>40 min</span>
+                            <span class="service-price">R$ 60</span>
                         </div>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%3A%20Tratamento%20capilar."
-                            class="btn-mini" target="_blank" rel="noopener" aria-label="Agendar tratamento capilar pelo WhatsApp">Agendar</a>
+                            class="btn btn-secondary btn-sm btn-block" target="_blank" rel="noopener noreferrer" aria-label="Agendar tratamento capilar pelo WhatsApp">Agendar</a>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- DIFERENCIAIS -->
-        <section id="diferenciais" class="section-padding bg-surface">
+        <!-- --- DIFERENCIAIS --- -->
+        <section id="diferenciais" class="section section-alt">
             <div class="container">
-                <div class="section-header reveal">
-                    <span class="tagline">Por que a Navalha</span>
-                    <h2>Mais que um corte, <span class="text-gold">um ritual</span></h2>
+                <div class="section-header section-header-center reveal">
+                    <p class="eyebrow">Por que a Navalha</p>
+                    <h2 class="section-title">Mais que um corte, <span class="text-accent">um ritual.</span></h2>
                 </div>
 
                 <div class="features-grid">
-                    <div class="feature-card reveal">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <div class="feature reveal">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <path d="M12 2v20M3.3 7 20.7 17M3.3 17 20.7 7" /><path d="m9 4 3 2 3-2M9 20l3-2 3 2" />
                             </svg>
                         </div>
-                        <h3>Ambiente climatizado</h3>
-                        <p>Ar-condicionado, som ambiente e poltronas confortáveis o ano inteiro.</p>
+                        <h3 class="card-title">Ambiente climatizado</h3>
+                        <p class="card-text">Ar-condicionado, som ambiente e poltronas confortáveis o ano inteiro.</p>
                     </div>
-                    <div class="feature-card reveal delay-1">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <div class="feature reveal delay-1">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" /><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 3v3M12 3v3" />
                             </svg>
                         </div>
-                        <h3>Cerveja ou café cortesia</h3>
-                        <p>Chegou, sentou, está servido. Uma gelada ou um espresso por nossa conta.</p>
+                        <h3 class="card-title">Cerveja ou café cortesia</h3>
+                        <p class="card-text">Chegou, sentou, está servido. Uma gelada ou um espresso por nossa conta.</p>
                     </div>
-                    <div class="feature-card reveal delay-2">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <div class="feature reveal delay-2">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4m-7 8 2 2 4-4" />
                             </svg>
                         </div>
-                        <h3>Agendamento online</h3>
-                        <p>Marque pelo WhatsApp em menos de um minuto e chegue sem fila de espera.</p>
+                        <h3 class="card-title">Agendamento online</h3>
+                        <p class="card-text">Marque pelo WhatsApp em menos de um minuto e chegue sem fila de espera.</p>
                     </div>
-                    <div class="feature-card reveal delay-3">
-                        <div class="icon-box">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke">
+                    <div class="feature reveal delay-3">
+                        <div class="icon-badge">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke">
                                 <circle cx="12" cy="9" r="6" /><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8" />
                             </svg>
                         </div>
-                        <h3>Profissionais experientes</h3>
-                        <p>Barbeiros com mais de 8 anos de cadeira e atualização constante em técnicas.</p>
+                        <h3 class="card-title">Profissionais experientes</h3>
+                        <p class="card-text">Barbeiros com mais de 8 anos de cadeira e atualização constante em técnicas.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- EQUIPE -->
-        <section id="equipe" class="section-padding">
+        <!-- --- EQUIPE --- -->
+        <section id="equipe" class="section">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="tagline">Nossa equipe</span>
-                    <h2>Mãos de <span class="text-gold">confiança</span></h2>
+                    <p class="eyebrow">Nossa equipe</p>
+                    <h2 class="section-title">Mãos de <span class="text-accent">confiança.</span></h2>
+                    <p class="section-lead">Cada um com a sua especialidade. Todos com o mesmo capricho.</p>
                 </div>
 
                 <div class="team-grid">
                     <article class="team-card reveal">
                         <div class="team-photo">
-                            <img src="assets/barbeiro-1.webp" alt="Rafael Moura, barbeiro, sorrindo de braços cruzados na barbearia"
+                            <img src="assets/barbeiro-1.webp" alt="Rafael Moura, barbeiro, finalizando um corte degradê com spray fixador"
                                 width="600" height="750" loading="lazy" decoding="async">
                         </div>
-                        <div class="team-info">
-                            <h3>Rafael Moura</h3>
-                            <p>Degradê e cortes modernos</p>
-                        </div>
+                        <h3 class="card-title">Rafael Moura</h3>
+                        <p class="team-role">Degradê e cortes modernos</p>
                     </article>
                     <article class="team-card reveal delay-1">
                         <div class="team-photo">
-                            <img src="assets/barbeiro-2.webp" alt="Diego Alves, barbeiro, segurando uma navalha"
+                            <img src="assets/barbeiro-2.webp" alt="Diego Alves, barbeiro, aparando a barba de um cliente deitado na cadeira"
                                 width="600" height="750" loading="lazy" decoding="async">
                         </div>
-                        <div class="team-info">
-                            <h3>Diego Alves</h3>
-                            <p>Barba, navalha e toalha quente</p>
-                        </div>
+                        <h3 class="card-title">Diego Alves</h3>
+                        <p class="team-role">Barba, navalha e toalha quente</p>
                     </article>
                     <article class="team-card reveal delay-2">
                         <div class="team-photo">
-                            <img src="assets/barbeiro-3.webp" alt="Thiago Nunes, barbeiro, finalizando um corte social"
+                            <img src="assets/barbeiro-3.webp" alt="Thiago Nunes, barbeiro, em retrato preto e branco segurando uma tesoura"
                                 width="600" height="750" loading="lazy" decoding="async">
                         </div>
-                        <div class="team-info">
-                            <h3>Thiago Nunes</h3>
-                            <p>Cortes clássicos e pigmentação</p>
-                        </div>
+                        <h3 class="card-title">Thiago Nunes</h3>
+                        <p class="team-role">Cortes clássicos e pigmentação</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- GALERIA -->
-        <section id="galeria" class="section-padding bg-surface">
+        <!-- --- GALERIA --- -->
+        <section id="galeria" class="section section-alt">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="tagline">Galeria</span>
-                    <h2>Trabalhos <span class="text-gold">recentes</span></h2>
+                    <p class="eyebrow">Galeria</p>
+                    <h2 class="section-title">Trabalhos <span class="text-accent">recentes.</span></h2>
+                    <p class="section-lead">Direto da nossa cadeira para o seu feed.</p>
                 </div>
 
                 <div class="gallery-grid">
-                    <figure class="gallery-item reveal">
-                        <img src="assets/corte-1.webp" alt="Corte degradê baixo com risca lateral" width="800" height="800" loading="lazy" decoding="async">
+                    <figure class="gallery-item gallery-item-large reveal">
+                        <img src="assets/corte-1.webp" alt="Degradê com desenho de tesoura feito na navalha na lateral da cabeça" width="800" height="800" loading="lazy" decoding="async">
                     </figure>
                     <figure class="gallery-item reveal delay-1">
-                        <img src="assets/corte-2.webp" alt="Barba cheia desenhada na navalha" width="800" height="800" loading="lazy" decoding="async">
+                        <img src="assets/corte-2.webp" alt="Barba cheia sendo aparada na tesoura" width="800" height="800" loading="lazy" decoding="async">
                     </figure>
                     <figure class="gallery-item reveal delay-2">
-                        <img src="assets/corte-3.webp" alt="Corte social clássico penteado para trás" width="800" height="800" loading="lazy" decoding="async">
+                        <img src="assets/corte-3.webp" alt="Topete penteado para trás com degradê nas laterais" width="800" height="800" loading="lazy" decoding="async">
                     </figure>
                     <figure class="gallery-item reveal">
-                        <img src="assets/corte-4.webp" alt="Corte crespo com degradê e contorno marcado" width="800" height="800" loading="lazy" decoding="async">
+                        <img src="assets/corte-4.webp" alt="Barbeiro finalizando um corte crespo com degradê e contorno marcado" width="800" height="800" loading="lazy" decoding="async">
                     </figure>
                     <figure class="gallery-item reveal delay-1">
-                        <img src="assets/corte-5.webp" alt="Barba com pigmentação e acabamento natural" width="800" height="800" loading="lazy" decoding="async">
+                        <img src="assets/corte-5.webp" alt="Perfil com degradê baixo e barba cheia bem desenhada" width="800" height="800" loading="lazy" decoding="async">
                     </figure>
                     <figure class="gallery-item reveal delay-2">
-                        <img src="assets/corte-6.webp" alt="Corte texturizado com topo mais longo" width="800" height="800" loading="lazy" decoding="async">
+                        <img src="assets/corte-6.webp" alt="Corte texturizado com risca marcada e laterais baixas, em preto e branco" width="800" height="800" loading="lazy" decoding="async">
                     </figure>
                 </div>
             </div>
         </section>
 
-        <!-- PLANOS -->
-        <section id="planos" class="section-padding">
+        <!-- --- PLANOS --- -->
+        <section id="planos" class="section">
             <div class="container">
                 <div class="section-header section-header-center reveal">
-                    <span class="tagline">Assinatura mensal</span>
-                    <h2>Entre para o <span class="text-gold">clube</span></h2>
-                    <p class="section-sub">Pague uma vez por mês e mantenha o visual em dia sem pensar no valor de cada visita.</p>
+                    <p class="eyebrow">Assinatura mensal</p>
+                    <h2 class="section-title">Entre para o <span class="text-accent">clube.</span></h2>
+                    <p class="section-lead">Pague uma vez por mês e mantenha o visual em dia sem pensar no valor de cada visita.</p>
                 </div>
 
                 <div class="plans-grid">
-                    <article class="plan-card card reveal">
-                        <h3>Clube Barba</h3>
-                        <p class="plan-price"><span class="currency">R$</span> 99<span class="period">/mês</span></p>
+                    <article class="card plan-card reveal">
+                        <h3 class="card-title">Clube Barba</h3>
+                        <p class="plan-price"><span class="plan-currency">R$</span>99<span class="plan-period">/mês</span></p>
                         <ul class="plan-list">
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>Barba ilimitada (ter. a qui.)</li>
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>Toalha quente em todas as visitas</li>
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>10% off em produtos</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>Barba ilimitada (ter. a qui.)</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>Toalha quente em todas as visitas</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>10% off em produtos</li>
                         </ul>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Clube%20Barba."
-                            class="btn-outline btn-block" target="_blank" rel="noopener">Assinar Clube Barba</a>
+                            class="btn btn-secondary btn-block" target="_blank" rel="noopener noreferrer">Assinar Clube Barba</a>
                     </article>
 
-                    <article class="plan-card card plan-featured reveal delay-1">
+                    <article class="card plan-card featured reveal delay-1">
                         <span class="card-badge">Mais escolhido</span>
-                        <h3>Clube Completo</h3>
-                        <p class="plan-price"><span class="currency">R$</span> 189<span class="period">/mês</span></p>
+                        <h3 class="card-title">Clube Completo</h3>
+                        <p class="plan-price"><span class="plan-currency">R$</span>189<span class="plan-period">/mês</span></p>
                         <ul class="plan-list">
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>Corte + barba ilimitados (ter. a qui.)</li>
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>Sobrancelha inclusa</li>
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>Prioridade na agenda de sábado</li>
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>15% off em produtos</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>Corte + barba ilimitados (ter. a qui.)</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>Sobrancelha inclusa</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>Prioridade na agenda de sábado</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>15% off em produtos</li>
                         </ul>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Clube%20Completo."
-                            class="btn-primary btn-block" target="_blank" rel="noopener">Assinar Clube Completo</a>
+                            class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer">Assinar Clube Completo</a>
                     </article>
 
-                    <article class="plan-card card reveal delay-2">
-                        <h3>Clube Corte</h3>
-                        <p class="plan-price"><span class="currency">R$</span> 119<span class="period">/mês</span></p>
+                    <article class="card plan-card reveal delay-2">
+                        <h3 class="card-title">Clube Corte</h3>
+                        <p class="plan-price"><span class="plan-currency">R$</span>119<span class="plan-period">/mês</span></p>
                         <ul class="plan-list">
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>Cortes ilimitados (ter. a qui.)</li>
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>Lavagem e finalização</li>
-                            <li><svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="m5 12 5 5L20 7" /></svg>10% off em produtos</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>Cortes ilimitados (ter. a qui.)</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>Lavagem e finalização</li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check" /></svg>10% off em produtos</li>
                         </ul>
                         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Clube%20Corte."
-                            class="btn-outline btn-block" target="_blank" rel="noopener">Assinar Clube Corte</a>
+                            class="btn btn-secondary btn-block" target="_blank" rel="noopener noreferrer">Assinar Clube Corte</a>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- DEPOIMENTOS -->
+        <!-- --- DEPOIMENTOS --- -->
         <!-- DADOS DE EXEMPLO: os depoimentos abaixo são fictícios, criados apenas para esta demonstração.
              Substitua por avaliações reais de clientes (ex.: Google) antes de publicar para um cliente. -->
-        <section id="depoimentos" class="section-padding bg-surface">
+        <section id="depoimentos" class="section section-alt">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="tagline">Depoimentos</span>
-                    <h2>Quem senta, <span class="text-gold">volta</span></h2>
+                    <p class="eyebrow">Depoimentos</p>
+                    <h2 class="section-title">Quem senta, <span class="text-accent">volta.</span></h2>
                 </div>
 
                 <div class="reviews-grid">
-                    <figure class="review-card card reveal">
-                        <div class="stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
+                    <figure class="card review-card reveal">
+                        <div class="review-stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
                         <blockquote class="review-text">"Melhor degradê que já fiz. O Rafael entende o que você quer sem precisar mostrar dez fotos. Virei assinante."</blockquote>
                         <figcaption class="review-author">
                             <span class="avatar" aria-hidden="true">L</span>
                             <span><strong>Lucas M.</strong><small>Cliente há 2 anos</small></span>
                         </figcaption>
                     </figure>
-                    <figure class="review-card card reveal delay-1">
-                        <div class="stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
+                    <figure class="card review-card reveal delay-1">
+                        <div class="review-stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
                         <blockquote class="review-text">"Ambiente top, cerveja gelada e pontualidade. Agendo pelo WhatsApp no almoço e sou atendido na hora marcada."</blockquote>
                         <figcaption class="review-author">
                             <span class="avatar" aria-hidden="true">F</span>
                             <span><strong>Felipe R.</strong><small>Assinante Clube Completo</small></span>
                         </figcaption>
                     </figure>
-                    <figure class="review-card card reveal delay-2">
-                        <div class="stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
+                    <figure class="card review-card reveal delay-2">
+                        <div class="review-stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
                         <blockquote class="review-text">"A pigmentação na barba ficou super natural. Ninguém percebe, só acham que a barba ficou mais cheia."</blockquote>
                         <figcaption class="review-author">
                             <span class="avatar" aria-hidden="true">A</span>
@@ -452,27 +444,27 @@
             </div>
         </section>
 
-        <!-- LOCALIZAÇÃO E HORÁRIOS (endereço fictício) -->
-        <section id="contato" class="section-padding">
+        <!-- --- LOCALIZAÇÃO E HORÁRIOS (endereço fictício) --- -->
+        <section id="contato" class="section">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="tagline">Onde estamos</span>
-                    <h2>Passa <span class="text-gold">aqui</span></h2>
+                    <p class="eyebrow">Onde estamos</p>
+                    <h2 class="section-title">Passa <span class="text-accent">aqui.</span></h2>
                 </div>
 
                 <div class="location-grid">
-                    <div class="location-info reveal">
+                    <div class="card location-card reveal">
                         <div class="info-block">
-                            <h3>
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
+                            <h3 class="info-title">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg>
                                 Endereço
                             </h3>
                             <address>Rua dos Artesãos, 250 — Vila Madalena<br>São Paulo / SP · CEP 05400-000</address>
                         </div>
 
                         <div class="info-block">
-                            <h3>
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+                            <h3 class="info-title">
+                                <svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>
                                 Horário de funcionamento
                             </h3>
                             <dl class="hours">
@@ -484,11 +476,11 @@
                         </div>
 
                         <div class="info-block">
-                            <h3>
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-stroke"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></svg>
+                            <h3 class="info-title">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon icon-stroke"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></svg>
                                 Contato
                             </h3>
-                            <p><a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Navalha%20Barber%20Club." target="_blank" rel="noopener" class="link-underline">(11) 90000-0000 · WhatsApp</a></p>
+                            <p><a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Navalha%20Barber%20Club." target="_blank" rel="noopener noreferrer" class="text-link">(11) 90000-0000 · WhatsApp</a></p>
                         </div>
                     </div>
 
@@ -501,68 +493,67 @@
             </div>
         </section>
 
-        <!-- CTA FINAL -->
+        <!-- --- CTA FINAL --- -->
         <section class="final-cta">
             <div class="container final-inner reveal">
-                <h2>Seu próximo corte <span class="text-gold">está a um clique</span></h2>
-                <p>Escolha o horário, chame no WhatsApp e chegue só para sentar na cadeira.</p>
+                <span class="pole-divider" aria-hidden="true"></span>
+                <h2 class="section-title">Seu próximo corte <span class="text-accent">está a um clique.</span></h2>
+                <p class="section-lead">Escolha o horário, chame no WhatsApp e chegue só para sentar na cadeira.</p>
                 <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Navalha%20Barber%20Club."
-                    class="btn-primary" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 640 640" aria-hidden="true" class="icon-fill">
-                        <path d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z" />
-                    </svg>
+                    class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp" /></svg>
                     Agendar horário
                 </a>
             </div>
         </section>
         </main>
 
-        <footer>
+        <footer class="site-footer">
             <div class="container">
                 <div class="footer-grid">
                     <div class="footer-brand">
-                        <p class="logo-text">NAVALHA <span class="text-gold">BARBER CLUB</span></p>
+                        <p class="logo">
+                            <span class="logo-mark" aria-hidden="true"></span>
+                            <span class="logo-name">Navalha</span>
+                            <span class="logo-sub">Barber Club</span>
+                        </p>
                         <p>Barbearia clássica com atendimento moderno na Vila Madalena.</p>
                     </div>
                     <div class="footer-contact">
                         <h2 class="footer-title">Contato</h2>
                         <p>Rua dos Artesãos, 250 — Vila Madalena, SP</p>
-                        <p><a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Navalha%20Barber%20Club." target="_blank" rel="noopener">(11) 90000-0000</a></p>
+                        <p><a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20na%20Navalha%20Barber%20Club." target="_blank" rel="noopener noreferrer">(11) 90000-0000</a></p>
                         <p><a href="mailto:contato@navalhabarberclub.com.br">contato@navalhabarberclub.com.br</a></p>
                     </div>
                     <div class="footer-social">
                         <h2 class="footer-title">Redes sociais</h2>
-                        <div class="footer-links">
-                            <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-                                <svg viewBox="0 0 640 640" aria-hidden="true" class="icon-fill">
-                                    <path d="M320.3 205C256.8 204.8 205.2 256.2 205 319.7C204.8 383.2 256.2 434.8 319.7 435C383.2 435.2 434.8 383.8 435 320.3C435.2 256.8 383.8 205.2 320.3 205zM319.7 245.4C360.9 245.2 394.4 278.5 394.6 319.7C394.8 360.9 361.5 394.4 320.3 394.6C279.1 394.8 245.6 361.5 245.4 320.3C245.2 279.1 278.5 245.6 319.7 245.4zM413.1 200.3C413.1 185.5 425.1 173.5 439.9 173.5C454.7 173.5 466.7 185.5 466.7 200.3C466.7 215.1 454.7 227.1 439.9 227.1C425.1 227.1 413.1 215.1 413.1 200.3zM542.8 227.5C541.1 191.6 532.9 159.8 506.6 133.6C480.4 107.4 448.6 99.2 412.7 97.4C375.7 95.3 264.8 95.3 227.8 97.4C192 99.1 160.2 107.3 133.9 133.5C107.6 159.7 99.5 191.5 97.7 227.4C95.6 264.4 95.6 375.3 97.7 412.3C99.4 448.2 107.6 480 133.9 506.2C160.2 532.4 191.9 540.6 227.8 542.4C264.8 544.5 375.7 544.5 412.7 542.4C448.6 540.7 480.4 532.5 506.6 506.2C532.8 480 541 448.2 542.8 412.3C544.9 375.3 544.9 264.5 542.8 227.5zM495 452C487.2 471.6 472.1 486.7 452.4 494.6C422.9 506.3 352.9 503.6 320.3 503.6C287.7 503.6 217.6 506.2 188.2 494.6C168.6 486.8 153.5 471.7 145.6 452C133.9 422.5 136.6 352.5 136.6 319.9C136.6 287.3 134 217.2 145.6 187.8C153.4 168.2 168.5 153.1 188.2 145.2C217.7 133.5 287.7 136.2 320.3 136.2C352.9 136.2 423 133.6 452.4 145.2C472 153 487.1 168.1 495 187.8C506.7 217.3 504 287.3 504 319.9C504 352.5 506.7 422.6 495 452z" />
+                        <div class="social-links">
+                            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <svg viewBox="0 0 640 640" aria-hidden="true" class="icon">
+                                    <path fill="currentColor" d="M320.3 205C256.8 204.8 205.2 256.2 205 319.7C204.8 383.2 256.2 434.8 319.7 435C383.2 435.2 434.8 383.8 435 320.3C435.2 256.8 383.8 205.2 320.3 205zM319.7 245.4C360.9 245.2 394.4 278.5 394.6 319.7C394.8 360.9 361.5 394.4 320.3 394.6C279.1 394.8 245.6 361.5 245.4 320.3C245.2 279.1 278.5 245.6 319.7 245.4zM413.1 200.3C413.1 185.5 425.1 173.5 439.9 173.5C454.7 173.5 466.7 185.5 466.7 200.3C466.7 215.1 454.7 227.1 439.9 227.1C425.1 227.1 413.1 215.1 413.1 200.3zM542.8 227.5C541.1 191.6 532.9 159.8 506.6 133.6C480.4 107.4 448.6 99.2 412.7 97.4C375.7 95.3 264.8 95.3 227.8 97.4C192 99.1 160.2 107.3 133.9 133.5C107.6 159.7 99.5 191.5 97.7 227.4C95.6 264.4 95.6 375.3 97.7 412.3C99.4 448.2 107.6 480 133.9 506.2C160.2 532.4 191.9 540.6 227.8 542.4C264.8 544.5 375.7 544.5 412.7 542.4C448.6 540.7 480.4 532.5 506.6 506.2C532.8 480 541 448.2 542.8 412.3C544.9 375.3 544.9 264.5 542.8 227.5zM495 452C487.2 471.6 472.1 486.7 452.4 494.6C422.9 506.3 352.9 503.6 320.3 503.6C287.7 503.6 217.6 506.2 188.2 494.6C168.6 486.8 153.5 471.7 145.6 452C133.9 422.5 136.6 352.5 136.6 319.9C136.6 287.3 134 217.2 145.6 187.8C153.4 168.2 168.5 153.1 188.2 145.2C217.7 133.5 287.7 136.2 320.3 136.2C352.9 136.2 423 133.6 452.4 145.2C472 153 487.1 168.1 495 187.8C506.7 217.3 504 287.3 504 319.9C504 352.5 506.7 422.6 495 452z" />
                                 </svg>
                             </a>
-                            <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
-                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-fill">
-                                    <path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8z" />
+                            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+                                    <path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8z" />
                                 </svg>
                             </a>
-                            <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener" aria-label="WhatsApp">
-                                <svg viewBox="0 0 640 640" aria-hidden="true" class="icon-fill">
-                                    <path d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z" />
-                                </svg>
+                            <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp" /></svg>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="copyright">
-                    <p>© 2026 Navalha Barber Club. Desenvolvido por <a href="/"><strong>StargoLab</strong></a>.</p>
+                    <p>© 2026 Navalha Barber Club. Desenvolvido por <a href="/"><strong>StargoLab.</strong></a></p>
                 </div>
             </div>
         </footer>
 
         <a href="https://wa.me/5511900000000?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20agendar%20um%20hor%C3%A1rio." class="whatsapp-float"
-            target="_blank" rel="noopener" aria-label="Agendar pelo WhatsApp">
-            <svg viewBox="0 0 640 640" aria-hidden="true" class="icon-fill">
-                <path d="M476.9 161.1C435 119.1 379.2 96 319.9 96C197.5 96 97.9 195.6 97.9 318C97.9 357.1 108.1 395.3 127.5 429L96 544L213.7 513.1C246.1 530.8 282.6 540.1 319.8 540.1L319.9 540.1C442.2 540.1 544 440.5 544 318.1C544 258.8 518.8 203.1 476.9 161.1zM319.9 502.7C286.7 502.7 254.2 493.8 225.9 477L219.2 473L149.4 491.3L168 423.2L163.6 416.2C145.1 386.8 135.4 352.9 135.4 318C135.4 216.3 218.2 133.5 320 133.5C369.3 133.5 415.6 152.7 450.4 187.6C485.2 222.5 506.6 268.8 506.5 318.1C506.5 419.9 421.6 502.7 319.9 502.7zM421.1 364.5C415.6 361.7 388.3 348.3 383.2 346.5C378.1 344.6 374.4 343.7 370.7 349.3C367 354.9 356.4 367.3 353.1 371.1C349.9 374.8 346.6 375.3 341.1 372.5C308.5 356.2 287.1 343.4 265.6 306.5C259.9 296.7 271.3 297.4 281.9 276.2C283.7 272.5 282.8 269.3 281.4 266.5C280 263.7 268.9 236.4 264.3 225.3C259.8 214.5 255.2 216 251.8 215.8C248.6 215.6 244.9 215.6 241.2 215.6C237.5 215.6 231.5 217 226.4 222.5C221.3 228.1 207 241.5 207 268.8C207 296.1 226.9 322.5 229.6 326.2C232.4 329.9 268.7 385.9 324.4 410C359.6 425.2 373.4 426.5 391 423.9C401.7 422.3 423.8 410.5 428.4 397.5C433 384.5 433 373.4 431.6 371.1C430.3 368.6 426.6 367.2 421.1 364.5z" />
-            </svg>
-            <span class="tooltip">Agendar horário</span>
+            target="_blank" rel="noopener noreferrer" aria-label="Agendar pelo WhatsApp">
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp" /></svg>
+            <span class="tooltip" aria-hidden="true">Agendar horário</span>
         </a>
     </div>
 

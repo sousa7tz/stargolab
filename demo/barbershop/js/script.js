@@ -1,77 +1,94 @@
-// Menu Mobile
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
-const navOverlay = document.querySelector(".nav-overlay");
+/** Navalha Barber Club — interações leves (sem bibliotecas). */
 
-function setMenu(open) {
-    hamburger.classList.toggle("active", open);
-    navMenu.classList.toggle("active", open);
-    navOverlay.classList.toggle("active", open);
-    document.body.classList.toggle("no-scroll", open);
-    hamburger.setAttribute("aria-expanded", open);
-    hamburger.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
-}
-
-hamburger.addEventListener("click", () => {
-    setMenu(!navMenu.classList.contains("active"));
-});
-navOverlay.addEventListener("click", () => setMenu(false));
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && navMenu.classList.contains("active")) {
-        setMenu(false);
-        hamburger.focus();
-    }
-});
-
-// Scroll suave para links internos (o offset do header fixo vem do scroll-padding-top no CSS)
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-        const id = link.getAttribute("href");
-        const target = id.length > 1 ? document.querySelector(id) : null;
-        if (!target) return;
+/** Menu mobile: abre/fecha o painel lateral, com overlay e tecla Esc. */
+function initMenu() {
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+    const navOverlay = document.querySelector(".nav-overlay");
+    if (!hamburger || !navMenu || !navOverlay) return;
 
-        e.preventDefault();
-        setMenu(false);
-        target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
-        history.pushState(null, "", id);
+    const setMenu = (open) => {
+        hamburger.classList.toggle("active", open);
+        navMenu.classList.toggle("active", open);
+        navOverlay.classList.toggle("active", open);
+        document.body.classList.toggle("no-scroll", open);
+        hamburger.setAttribute("aria-expanded", open);
+        hamburger.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+    };
+
+    hamburger.addEventListener("click", () => setMenu(!navMenu.classList.contains("active")));
+    navOverlay.addEventListener("click", () => setMenu(false));
+    navMenu.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setMenu(false)));
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && navMenu.classList.contains("active")) {
+            setMenu(false);
+            hamburger.focus();
+        }
     });
-});
+}
 
-// Animação ao Scroll (Intersection Observer)
-const revealEls = document.querySelectorAll(".reveal");
+/** Scroll suave para links internos (o offset do header fixo vem do scroll-padding-top no CSS). */
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+            const id = link.getAttribute("href");
+            const target = id.length > 1 ? document.querySelector(id) : null;
+            if (!target) return;
 
-if ("IntersectionObserver" in window) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+            history.pushState(null, "", id);
+        });
+    });
+}
+
+/** Animação de entrada: adiciona .active aos elementos .reveal quando entram na tela. */
+function initReveal() {
+    const revealEls = document.querySelectorAll(".reveal");
+    if (!revealEls.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+        revealEls.forEach((el) => el.classList.add("active"));
+        return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-                observer.unobserve(entry.target); // Para de observar depois que animou (Performance)
-            }
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
         });
     }, { threshold: 0.1 });
 
     revealEls.forEach((el) => observer.observe(el));
-} else {
-    revealEls.forEach((el) => el.classList.add("active"));
 }
 
-// Header performático (classe ao invés de estilo direto)
-const header = document.getElementById("header");
-let ticking = false;
+/** Header: aplica o efeito de vidro (.scrolled) depois de rolar a página. */
+function initHeader() {
+    const header = document.getElementById("header");
+    if (!header) return;
 
-function onScroll() {
-    header.classList.toggle("scrolled", window.scrollY > 50);
-    ticking = false;
-}
+    let ticking = false;
+    const update = () => {
+        header.classList.toggle("scrolled", window.scrollY > 24);
+        ticking = false;
+    };
 
-window.addEventListener("scroll", () => {
-    if (!ticking) {
-        window.requestAnimationFrame(onScroll);
+    window.addEventListener("scroll", () => {
+        if (ticking) return;
+        window.requestAnimationFrame(update);
         ticking = true;
-    }
-}, { passive: true });
+    }, { passive: true });
 
-onScroll();
+    update();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initMenu();
+    initSmoothScroll();
+    initReveal();
+    initHeader();
+});
